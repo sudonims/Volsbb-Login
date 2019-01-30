@@ -3,5 +3,5 @@
   PS:Use parantheses for print statements if u r using python 3.0+.
 3)Install selenium by running the command 'pip install selenium' in command prompt or terminal.
 4)For windows users, double click on the python script..
-  For Mac and Linux users..,u probably have got the idea of what to do.
+  For Mac and Linux users..,u probably have got the idea of what to do.(just create an alias..XD)
 
