@@ -1,0 +1,15 @@
+{
+    "browser_action":{
+        "default_popup":"popup.html",
+        "default_title":"Save"
+    },
+    "background":{
+        "scripts":["background.js"]
+    },
+    "permissions": ["storage","http://phc.prontonetworks.com/*","webRequest","tabs","notifications"],
+    "name": "VTOP Login",
+    "version": "1.0",
+    "description": "Login to VOLSBB easily",
+    "author":"sudonim:Back-End, Deep Golani:Front-End",
+    "manifest_version": 2
+}
