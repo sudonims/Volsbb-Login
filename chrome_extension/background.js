@@ -1,6 +1,7 @@
 var xhr = new XMLHttpRequest();
 
 chrome.runtime.onStartup.addListener(function(){
+    chrome.runtime.sendMessage({login:"None"});
     login();
 });
 
@@ -12,7 +13,7 @@ const login = ()=>{
         var pass=data.password;
         xhr.open("POST","http://phc.prontonetworks.com/cgi-bin/authlogin",true);
         xhr.setRequestHeader('content-Type','application/x-www-form-urlencoded')
-        var post_params="userId="+user+"&password="+pass+"&serviceName=ProntoAuthentication&Submit22=Login"
+        var post_params="userId="+user+"&password="+pass+"&serviceName=ProntoAuthentication&Submit22=Login";
         xhr.send(post_params);
         // console.log(xhr.responseText);
         xhr.onreadystatechange=function(){
@@ -37,33 +38,33 @@ const login = ()=>{
     });
 }
 
-const logout=()=>{
-    xhr.open('GET','http://phc.prontonetworks.com/cgi-bin/authlogout',true);
-    // xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-    
+const logout = () => {
+    xhr.open('GET', 'http://phc.prontonetworks.com/cgi-bin/authlogout', true);
     xhr.send();
-    xhr.onreadystatechange = ()=>{
-        var logout_success=new RegExp("You have successfully logged out");
-        var no_session=new RegExp("There is no active session to logout.");
-        var response=xhr.responseText;
-        if(logout_success.test(response)){
-            chrome.runtime.sendMessage({logout:"success"});
+    xhr.onreadystatechange = () => {
+        var logout_success = new RegExp("You have successfully logged out");
+        var no_session = new RegExp("There is no active session to logout.");
+        var response = xhr.responseText;
+        if (logout_success.test(response)) {
+            chrome.runtime.sendMessage({ login: "logout_success" });
             console.log('success');
-            // alert("Logged out");
+            // message();
+            // alert("Logged out"); 
         }
-        else if(no_session.test(response)){
-            chrome.runtime.sendMessage({logout:"No Session Active"})
+        else if (no_session.test(response)) {
+            chrome.runtime.sendMessage({ login: "logout_No_Session" });
             console.log('No session active');
-        }    
+            // message();
+        }
     }
 }
 
 
 chrome.runtime.onMessage.addListener((request,sender,sendResponse)=>{
-    if(request.login=="Do it"){
+    if(request.login=="login_do_it"){
         login();
     }
-    if(request.logout=="Do it"){
+    if(request.login=="logout_do_it"){
         logout();
     }
 });
