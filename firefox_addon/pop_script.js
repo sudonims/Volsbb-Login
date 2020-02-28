@@ -23,12 +23,10 @@ document.addEventListener('DOMContentLoaded',function(){
         var user=document.getElementById('username').value;
         var pass=document.getElementById('password').value;
 
-        browser.storage.local.set({"username":user,"password":pass});
-        browser.storage.onChanged.addListener(function(changes,area){
-            alert('Successfully saved');
+        browser.storage.local.set({"username":user,"password":pass}).then(function(){
+            console.log('Successfully Saved.');
         });
-
-
+   
 
         // browser.storage.local.get(null,function(data){
         //     document.getElementById('check').innerHTML=data.username;
@@ -37,29 +35,72 @@ document.addEventListener('DOMContentLoaded',function(){
     });
 
     login.addEventListener('click',function(){
-        browser.runtime.sendMessage({login:"Do it"});
+        browser.runtime.sendMessage({login:"login_do_it"});
     },false);
 
     logout.addEventListener('click',function(){
-        browser.runtime.sendMessage({logout:"Do it"});
+        browser.runtime.sendMessage({login:"logout_do_it"});
     },false);
 
-    browser.runtime.onMessage.addListener(function(request,sender,sendResponse){
-        if(request.login=="Successful"){
-            alert('Logged in successfully');
+    // browser.runtime.onMessage.addListener(function(request,sender,sendResponse){
+    //     if(request.login=="Successful"){
+    //         alert('Logged in successfully');
+    //     }
+    //     else if(request.login=="Already logged in"){
+    //         alert('Already logged in');
+    //     }
+    //     else if(request.login=="Wrong credentials"){
+    //         alert('Username or Password is wrong');
+    //     }
+    //     else if(request.logout=="success"){
+    //         alert('Successfully logged out');
+    //     }
+    //     else if(request.logout=="No Session Active"){
+    //         alert("No session active");
+    //     }
+    // });
+
+    browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        var loginn = request.login;
+        console.log(loginn);
+        if (loginn == "Successful") {
+            browser.notifications.create("login_success", {
+                "type": "basic",
+                // "iconUrl": browser.runtime.getURL("icons/cake-96.png"),
+                "title": "Logged In",
+                "message": "Successfully Logged In"
+            });
         }
-        else if(request.login=="Already logged in"){
-            alert('Already logged in');
+        else if (loginn == "Already logged in") {
+            browser.notifications.create("login_already", {
+                "type": "basic",
+                "title": "Session Present",
+                "message": "Already Logged In"
+            });
         }
-        else if(request.login=="Wrong credentials"){
-            alert('Username or Password is wrong');
+        else if (loginn == "Wrong credentials") {
+            browser.notifications.create("login_wrng", {
+                "type": "basic",
+                "title": "Wrong",
+                "message": "Wrong Credentials",
+    
+            });
         }
-        else if(request.logout=="success"){
-            alert('Successfully logged out');
+        else if (loginn == "logout_success") {
+            browser.notifications.create("logout_success", {
+                "type": "basic",
+                "title": "logged out",
+                "message": "Logged Out Successfully"
+            });
         }
-        else if(request.logout=="No Session Active"){
-            alert("No session active");
+        else if (loginn == "logout_No_Session") {
+            browser.notifications.create("no_session", {
+                "type": "basic",
+                "title": "No Session",
+                "message": "No Session Active to Logout"
+            });
         }
     });
+    
 
 },false);

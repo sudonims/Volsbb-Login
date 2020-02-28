@@ -6,9 +6,9 @@
     "background":{
         "scripts":["background.js"]
     },
-    "permissions": ["storage","http://phc.prontonetworks.com/*","webRequest","tabs","notifications"],
+    "permissions": ["storage","http://phc.prontonetworks.com/*","webRequest","notifications"],
     "name": "VTOP Login",
-    "version": "1.0",
+    "version": "1.2",
     "description": "Login to VOLSBB easily",
     "author":"sudonim:Back-End, Deep Golani:Front-End",
     "manifest_version": 2
