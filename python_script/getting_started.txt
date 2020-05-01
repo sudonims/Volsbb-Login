@@ -1,7 +1,8 @@
-1) Download ChromeDriver for your respective OS.The zip files are commited.
+1) Download ChromeDriver for your respective OS.
+
 2)Make changes to the python script...you will know what to  change once you have opened the file.
   PS:Use parantheses for print statements if u r using python 3.0+.
-3)Install selenium by running the command 'pip install selenium' in command prompt or terminal.
-4)For windows users, double click on the python script..
-  For Mac and Linux users..,u probably have got the idea of what to do.(just create an alias..XD)
 
+3)Install selenium by running the command 'pip install selenium' in command prompt or terminal.
+
+4)Run the script

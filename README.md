@@ -9,8 +9,3 @@ To install extensions on chrome :
 6) Enjoy.
 
 
-To install extension on Firefox:
-1) Open Firefox 
-2) Go to this link https://addons.mozilla.org/en-US/firefox/addon/volsbb-login
-3) Install extension 
-4) Enjoy
